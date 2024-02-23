@@ -1,5 +1,5 @@
 import sensors
-
+from time import sleep as zzz
 
 # accelerometer and magnetometer on any i2c pin
 sensor_pins={ "accel":3,
@@ -14,4 +14,8 @@ while True:
     mx,my,mz=sensors.magnetometer.get_xyz() 
     # magnitude of magnetic field
     mm = sensors.magnetometer.get_magnitude()
-    print(ax,ay,az,am,mx,my,mz,mm) 
+    
+
+    print(f"Acceleration: {round(ax,2)},{round(ay,2)},{round(az,2)}")
+    print(f"Magnetometer: {round(mx,2)},{round(my,2)},{round(mz,2)},{round(mm,2)}")
+    zzz(0.1)
