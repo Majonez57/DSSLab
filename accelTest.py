@@ -10,7 +10,9 @@ bgx, bgy, bgz = 0, 0 ,0
 
 poll = 10
 take = False
+
 while True:        
+
     # acceleration in x,y,z axes
     ax,ay,az=sensors.accel.get_xyz()
     # magnitude of acceleration
@@ -29,6 +31,8 @@ while True:
         bgx += rx
         bgy += ry
         bgz += rz
+
+        poll +=1
 
     if poll == 10 and take == False:
         bx /= 10
