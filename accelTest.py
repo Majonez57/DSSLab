@@ -3,19 +3,49 @@ from time import sleep as zzz
 
 # accelerometer and magnetometer on any i2c pin
 sensor_pins={ "accel":3,
-"magnetometer":3}
+"gyro":3, "button":2}
 sensors.set_pins(sensor_pins)
-while True:
+bx, by, bz = 0
+bgx, bgy, bgz = 0
+
+poll = 10
+take = False
+while True:        
     # acceleration in x,y,z axes
     ax,ay,az=sensors.accel.get_xyz()
     # magnitude of acceleration
     am = sensors.accel.get_magnitude()
     # magnetic field strength in x,y,z axes
-    mx,my,mz=sensors.magnetometer.get_xyz() 
+    rx,ry,rz=sensors.gyro.get_xyz() 
     # magnitude of magnetic field
-    mm = sensors.magnetometer.get_magnitude()
+    rm = sensors.gyro.get_magnitude()
     
 
-    print(f"Acceleration: {round(ax,2)},{round(ay,2)},{round(az,2)}")
-    print(f"Magnetometer: {round(mx,2)},{round(my,2)},{round(mz,2)},{round(mm,2)}")
+    if poll != 10:
+        bx += ax
+        by += ay
+        bz += az
+
+        bgx += rx
+        bgy += ry
+        bgz += rz
+
+    if poll == 10 and take == False:
+        bx /= 10
+        by /= 10
+        bz /= 10
+
+        bgx /= 10
+        bgy /= 10
+        bgz /= 10
+        take = True
+        
+
+    #Set baseline
+    if sensors.button.get_level() == 1:
+        poll = 0
+        take = False
+        
+    print(f"Acceleration: {round(ax-bx,2)},{round(ay-by,2)},{round(az-bz,2)}, {round(am, 2)}")
+    print(f"Gyro: {round(rx-bgx,2)},{round(ry-bgy,2)},{round(rz-bgz,2)},{round(rm,2)}")
     zzz(0.1)
