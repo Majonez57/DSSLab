@@ -18,7 +18,7 @@ take = False
 timeinit = time.time()
 
 def save_to_file(filename, vars):
-    with open(filename, mode='a', newline=' ') as file:
+    with open(filename, mode='a', newline='') as file:
         writer = csv.writer(file)
         stamp = timeinit - time.time
         writer.writerow([stamp] + vars)
