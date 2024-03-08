@@ -51,15 +51,15 @@ while True:
         poll +=1
 
     if poll == POLLSIZE and take == False:
-        bx /= 10
-        by /= 10
-        bz /= 10
+        bx /= POLLSIZE
+        by /= POLLSIZE
+        bz /= POLLSIZE
 
-        bgx /= 10
-        bgy /= 10
-        bgz /= 10
+        bgx /= POLLSIZE
+        bgy /= POLLSIZE
+        bgz /= POLLSIZE
 
-        ss /= 10
+        ss /= POLLSIZE
 
         take = True
         
