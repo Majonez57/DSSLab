@@ -70,7 +70,7 @@ while True:
         take = False
         
     if poll == 0:
-        save_to_file('data.csv', [round(x, 2) for x in [ax,ay,az,am,rx,ry,rz,rm,s]])
+        save_to_file('data.csv', [ax,ay,az,am,rx,ry,rz,rm,s])
 
     if (ax-bx)**2 + (ay-by)**2 + (az-bz)**2 > 0:
         print("PUNCH")
