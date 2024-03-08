@@ -2,7 +2,7 @@ import sensors
 from time import sleep as zzz
 
 # accelerometer and magnetometer on any i2c pin
-sensor_pins={ "accel":3,"gyro":3,"sound":2, "button":2}
+sensor_pins={ "accel":3,"gyro":3,"sound":0, "button":2}
 sensors.set_pins(sensor_pins)
 
 bx, by, bz = 0, 0 ,0
