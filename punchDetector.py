@@ -1,5 +1,8 @@
 import sensors
+import csv
+import time
 from time import sleep as zzz
+
 
 # accelerometer and magnetometer on any i2c pin
 sensor_pins={ "accel":3,"gyro":3,"sound":0, "button":2}
@@ -7,9 +10,18 @@ sensors.set_pins(sensor_pins)
 
 bx, by, bz = 0, 0 ,0
 bgx, bgy, bgz = 0, 0 ,0
+ss = 0
 
 poll = 10
 take = False
+
+timeinit = time.time()
+
+def save_to_file(filename, vars):
+    with open(filename, mode='a', newline=' ') as file:
+        writer = csv.writer(file)
+        stamp = timeinit - time.time
+        writer.writerow([stamp] + vars)
 
 while True:        
 
@@ -34,6 +46,8 @@ while True:
         bgy += ry
         bgz += rz
 
+        ss += s
+
         poll +=1
 
     if poll == 10 and take == False:
@@ -44,6 +58,9 @@ while True:
         bgx /= 10
         bgy /= 10
         bgz /= 10
+
+        ss /= 10
+
         take = True
         
 
@@ -52,10 +69,13 @@ while True:
         poll = 0
         take = False
         
+    if ss != 0:
+        save_to_file('data.csv', [ax,ay,az,am,rx,ry,rz,rm,s])
+
     if (ax-bx)**2 + (ay-by)**2 + (az-bz)**2 > 0:
         print("PUNCH")
         print(f"Acceleration: {round(ax-bx,2)},{round(ay-by,2)},{round(az-bz,2)}, {round(am, 2)}")
         print(f"Gyro: {round(rx-bgx,2)},{round(ry-bgy,2)},{round(rz-bgz,2)},{round(rm,2)}")
-        print(f"Sound: {s}")
+        print(f"Sound: {s-ss}")
     
     zzz(0.05)
