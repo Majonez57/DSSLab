@@ -12,7 +12,7 @@ bx, by, bz = 0, 0 ,0
 bgx, bgy, bgz = 0, 0 ,0
 ss = 0
 
-poll = POLLSIZE
+poll = 0
 take = False
 
 timeinit = time.time()
@@ -37,7 +37,7 @@ while True:
     s=sensors.sound.get_level()
     
 
-    if poll != 10:
+    if poll != POLLSIZE:
         bx += ax
         by += ay
         bz += az
@@ -50,7 +50,7 @@ while True:
 
         poll +=1
 
-    if poll == 10 and take == False:
+    if poll == POLLSIZE and take == False:
         bx /= 10
         by /= 10
         bz /= 10
@@ -69,7 +69,7 @@ while True:
         poll = 0
         take = False
         
-    if poll == 0:
+    if poll == POLLSIZE:
         save_to_file('data.csv', [round(x, 2) for x in [ax,ay,az,am,rx,ry,rz,rm,s]])
         print("PUNCH")
         print(f"Acceleration: {round(ax-bx,2)},{round(ay-by,2)},{round(az-bz,2)}, {round(am, 2)}")
