@@ -71,8 +71,6 @@ while True:
         
     if poll == 0:
         save_to_file('data.csv', [round(x, 2) for x in [ax,ay,az,am,rx,ry,rz,rm,s]])
-
-    if (ax-bx)**2 + (ay-by)**2 + (az-bz)**2 > 0:
         print("PUNCH")
         print(f"Acceleration: {round(ax-bx,2)},{round(ay-by,2)},{round(az-bz,2)}, {round(am, 2)}")
         print(f"Gyro: {round(rx-bgx,2)},{round(ry-bgy,2)},{round(rz-bgz,2)},{round(rm,2)}")
