@@ -3,7 +3,7 @@ import csv
 import time
 from time import sleep as zzz
 
-
+POLLSIZE = 100
 # accelerometer and magnetometer on any i2c pin
 sensor_pins={ "accel":3,"gyro":3,"sound":0, "button":2}
 sensors.set_pins(sensor_pins)
@@ -12,7 +12,7 @@ bx, by, bz = 0, 0 ,0
 bgx, bgy, bgz = 0, 0 ,0
 ss = 0
 
-poll = 10
+poll = POLLSIZE
 take = False
 
 timeinit = time.time()
@@ -69,7 +69,7 @@ while True:
         poll = 0
         take = False
         
-    if ss != 0:
+    if poll == 0:
         save_to_file('data.csv', [ax,ay,az,am,rx,ry,rz,rm,s])
 
     if (ax-bx)**2 + (ay-by)**2 + (az-bz)**2 > 0:
