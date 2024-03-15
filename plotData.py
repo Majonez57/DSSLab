@@ -9,9 +9,11 @@ varnames = ["AccelXLow", "AccelYLow", "AccelZLow", "AccelMLow",
             "GyroXTop", "GyroYTop", "GyroZTop", "GyroMTop",
             "SoundLow"]
 
+varn = 17
+
 def read_variables_from_file(filename):
     timestamps = []
-    variables = [[] for _ in range(9)]  # List of lists for 9 variables
+    variables = [[] for _ in range(varn)] 
     with open(filename, mode='r') as file:
         reader = csv.reader(file)
         for row in reader:
@@ -21,19 +23,29 @@ def read_variables_from_file(filename):
     return [round(float(x), 3) for x in timestamps], variables
 
 def plot_variables(timestamps, variables):
-    fig, axs = plt.subplots(9, 1, figsize=(10, 20), sharex=True)
+    fig, axs = plt.subplots(17, 1, figsize=(8, 20), sharex=True)
 
-    for i, ax in enumerate(axs):
+    for i, vars in enumerate(variables):
+
+        ax = axs[i]
+        
         # Round x-axis values
         timestamps_dt = [ts for ts in timestamps]
         x_values = np.arange(len(timestamps))
-        ax.plot(timestamps_dt, variables[i], label=varnames[i])
+        
+        ax.plot(timestamps_dt, vars, label=varnames[i])
         
         # Calculate sliding average
-        window_size = 8 if i == len(variables)-1 else 4  # You can adjust the window size
-        sliding_avg = np.convolve(variables[i], np.ones(window_size)/window_size, mode='same')
+        window_size = 5 if i == len(variables)-1 else 3  # You can adjust the window size
+        sliding_avg = np.convolve(vars, np.ones(window_size)/window_size, mode='same')
         ax.plot(timestamps_dt, sliding_avg, color='orange')
         
+        
+        if "Accel" in varnames[i]:
+            ax.set_ylim(-3, 3)
+        if "Gyro" in varnames[i]:
+            ax.set_ylim(-500, 500)
+
         ax.grid(True)
         ax.legend()
     
@@ -43,5 +55,7 @@ def plot_variables(timestamps, variables):
     plt.show()
 
 # Example Usage
-timestamps, variables = read_variables_from_file('data3.csv')
+num = 1
+
+timestamps, variables = read_variables_from_file(f'Data/data{num}.csv')
 plot_variables(timestamps, variables)
