@@ -11,51 +11,58 @@ varnames = ["AccelXLow", "AccelYLow", "AccelZLow", "AccelMLow",
 
 varn = 17
 
+TESTNUM = 1
+
 def read_variables_from_file(filename):
     timestamps = []
     variables = [[] for _ in range(varn)] 
     with open(filename, mode='r') as file:
         reader = csv.reader(file)
+        init_time = float(next(reader)[0])  # Read the first line, convert to float
         for row in reader:
-            timestamps.append(row[0])
+            timestamps.append(init_time + float(row[0]))  # Add to initial timestamp
             for i, value in enumerate(row[1:]):
                 variables[i].append(float(value))
-    return [round(float(x), 3) for x in timestamps], variables
+    return timestamps, variables
 
-def plot_variables(timestamps, variables):
-    fig, axs = plt.subplots(17, 1, figsize=(8, 20), sharex=True)
+def plot_variables(timestamps, variables, window_size=5):
+    fig, axs = plt.subplots(varn, 1, figsize=(10, 20), sharex=True)
 
     for i, vars in enumerate(variables):
-
         ax = axs[i]
         
-        # Round x-axis values
-        timestamps_dt = [ts for ts in timestamps]
-        x_values = np.arange(len(timestamps))
+        x_values = timestamps
         
-        ax.plot(timestamps_dt, vars, label=varnames[i])
+        ax.plot(x_values, vars, label=varnames[i])
         
         # Calculate sliding average
-        window_size = 5 if i == len(variables)-1 else 3  # You can adjust the window size
         sliding_avg = np.convolve(vars, np.ones(window_size)/window_size, mode='same')
-        ax.plot(timestamps_dt, sliding_avg, color='orange')
-        
+        ax.plot(x_values, sliding_avg, color='orange', label='Sliding Avg')
         
         if "Accel" in varnames[i]:
             ax.set_ylim(-3, 3)
-        if "Gyro" in varnames[i]:
+        elif "Gyro" in varnames[i]:
             ax.set_ylim(-500, 500)
 
         ax.grid(True)
-        ax.legend()
+        ax.legend(loc='upper right')
+        ax.set_ylabel(varnames[i])  # Set y-labels for each variable
     
     axs[-1].set_xlabel('Time')
     plt.xticks(rotation=45)
+    
+    # Read labels file and plot vertical lines
+    with open(f'Labels/labels{TESTNUM}.txt', 'r') as labels_file:
+        for line in labels_file:
+            label_time = float(line.split(',')[0])
+            for ax in axs:
+                ax.axvline(x=label_time, color='red', linestyle='--', linewidth=1)
+
     plt.tight_layout()
     plt.show()
 
 # Example Usage
-num = 1
 
-timestamps, variables = read_variables_from_file(f'Data/data{num}.csv')
+
+timestamps, variables = read_variables_from_file(f'Data/data{TESTNUM}.csv')
 plot_variables(timestamps, variables)

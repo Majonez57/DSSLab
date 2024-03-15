@@ -16,7 +16,10 @@ def save_to_file(filename, vars):
         stamp = time.time() - timeinit
         writer.writerow([stamp] + vars)
 
-FILE = 'data.csv'
+num = input("EnterTestNum")
+
+FILE = f'data{num}.csv'
+
 with open(FILE, mode='w', newline='') as file:
     writer = csv.writer(file)
     writer.writerow(time.time())

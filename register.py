@@ -1,7 +1,10 @@
 import time
 from pynput import keyboard
 
-name = 'labels2'
+
+num = input("EnterTestNum")
+
+name = f'labels{num}'
 
 def on_press(key):
     try:
