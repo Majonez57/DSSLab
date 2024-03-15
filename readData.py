@@ -10,15 +10,15 @@ sensors.set_pins(sensor_pins)
 
 timeinit = time.time()
 
-def save_to_file(filename, vars):
-    with open(filename, mode='a', newline='') as file:
-        writer = csv.writer(file)
-        stamp = time.time() - timeinit
-        writer.writerow([stamp] + vars)
-
 num = str(input("EnterTestNum: "))
 
 FILE = f"Data/data{num}.csv"
+
+def save_to_file(vars):
+    with open(FILE, mode='a', newline='') as file:
+        writer = csv.writer(file)
+        stamp = time.time() - timeinit
+        writer.writerow([stamp] + vars)
 
 with open(FILE, mode='a', newline='') as file:
     writer = csv.writer(file)
@@ -41,7 +41,7 @@ while True:
 
     s =sensors.sound.get_level()
         
-    save_to_file('FILE', [ax,ay,az,am,rx,ry,rz,rm,ax2,ay2,az2,am2,rx2,ry2,rz2,rm2,s])
+    save_to_file([ax,ay,az,am,rx,ry,rz,rm,ax2,ay2,az2,am2,rx2,ry2,rz2,rm2,s])
 
 
     print(f"Acceleration: {round(ax,2)},{round(ay,2)},{round(az,2)}, {round(am, 2)}")

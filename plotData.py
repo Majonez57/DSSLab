@@ -1,5 +1,6 @@
 import csv
 import matplotlib.pyplot as plt
+from matplotlib.ticker import (AutoMinorLocator, MultipleLocator)
 import numpy as np
 from datetime import datetime
 
@@ -11,7 +12,7 @@ varnames = ["AccelXLow", "AccelYLow", "AccelZLow", "AccelMLow",
 
 varn = 17
 
-TESTNUM = 2
+TESTNUM = 3
 
 def read_variables_from_file(filename):
     timestamps = []
@@ -45,8 +46,9 @@ def plot_variables(timestamps, variables, window_size=5):
             ax.set_ylim(-500, 500)
 
         ax.grid(True)
+        ax.xaxis.set_major_locator(MultipleLocator(1))
         ax.legend(loc='upper right')
-        ax.set_ylabel(varnames[i])  # Set y-labels for each variable
+        #ax.set_ylabel(varnames[i])  # Set y-labels for each variable
     
     axs[-1].set_xlabel('Time')
     plt.xticks(rotation=45)
@@ -56,7 +58,7 @@ def plot_variables(timestamps, variables, window_size=5):
         for line in labels_file:
             label_time = float(line.split(',')[0])
             for ax in axs:
-                ax.axvline(x=label_time, color='red', linestyle='--', linewidth=1)
+                ax.axvline(x=label_time+0.5, color='red', linestyle='--', linewidth=1)
 
     plt.tight_layout()
     plt.show()
