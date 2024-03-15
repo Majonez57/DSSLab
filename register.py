@@ -2,7 +2,7 @@ import time
 from pynput import keyboard
 
 
-num = input("EnterTestNum")
+num = str(input("EnterTestNum: "))
 
 name = f'labels{num}'
 

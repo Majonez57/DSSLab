@@ -16,7 +16,7 @@ def save_to_file(filename, vars):
         stamp = time.time() - timeinit
         writer.writerow([stamp] + vars)
 
-num = input("EnterTestNum")
+num = str(input("EnterTestNum: "))
 
 FILE = f"data{num}.csv"
 
