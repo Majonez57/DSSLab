@@ -20,7 +20,7 @@ num = str(input("EnterTestNum: "))
 
 FILE = f"data{num}.csv"
 
-with open(FILE, mode='w', newline='') as file:
+with open(FILE, mode='a', newline='') as file:
     writer = csv.writer(file)
     writer.writerow([time.time()])
 

@@ -11,7 +11,7 @@ varnames = ["AccelXLow", "AccelYLow", "AccelZLow", "AccelMLow",
 
 varn = 17
 
-TESTNUM = 1
+TESTNUM = 2
 
 def read_variables_from_file(filename):
     timestamps = []
