@@ -5,7 +5,7 @@ from time import sleep as zzz
 
 POLLSIZE = 100
 # accelerometer and magnetometer on any i2c pin
-sensor_pins={ "accel":3,"gyro":3, "accel2":2,"gyro2":2,"mag2":2,"sound":0, "button":2}
+sensor_pins={ "accel":3,"gyro":3, "accel2":2,"gyro2":2,"sound":0, "button":2}
 sensors.set_pins(sensor_pins)
 
 timeinit = time.time()
