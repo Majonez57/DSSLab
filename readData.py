@@ -18,7 +18,7 @@ def save_to_file(filename, vars):
 
 num = input("EnterTestNum")
 
-FILE = f'data{num}.csv'
+FILE = f"data{num}.csv"
 
 with open(FILE, mode='w', newline='') as file:
     writer = csv.writer(file)
