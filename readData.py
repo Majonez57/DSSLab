@@ -22,7 +22,7 @@ FILE = f"data{num}.csv"
 
 with open(FILE, mode='w', newline='') as file:
     writer = csv.writer(file)
-    writer.writerow(time.time())
+    writer.writerow([time.time()])
 
 while True:        
 
