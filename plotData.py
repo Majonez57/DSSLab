@@ -2,6 +2,7 @@ import csv
 import matplotlib.pyplot as plt
 from matplotlib.ticker import (AutoMinorLocator, MultipleLocator)
 import numpy as np
+import pandas as pd
 from datetime import datetime
 
 varnames = ["AccelXLow", "AccelYLow", "AccelZLow", "AccelMLow",
@@ -12,8 +13,8 @@ varnames = ["AccelXLow", "AccelYLow", "AccelZLow", "AccelMLow",
 
 varn = 17
 
-TESTNUM = 1
-TESTOFFSETS = [0,-2.4,-1.5] # Reaction time offset for each hit
+TESTNUM = 4
+TESTOFFSETS = [0,-2.4,-1.5,-30] # Reaction time offset for each hit
 
 def read_variables_from_file(filename):
     timestamps = []
@@ -27,7 +28,7 @@ def read_variables_from_file(filename):
                 variables[i].append(float(value))
     return timestamps, variables
 
-def plot_variables(timestamps, variables, window_size=5):
+def plot_variables(timestamps, variables, window_size=10):
     fig, axs = plt.subplots(varn, 1, figsize=(10, 20), sharex=True)
 
     for i, vars in enumerate(variables):

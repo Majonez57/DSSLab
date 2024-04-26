@@ -9,8 +9,8 @@ features = ["AccelXLow", "AccelYLow", "AccelZLow", "AccelMLow",
             "GyroXTop", "GyroYTop", "GyroZTop", "GyroMTop",
             "SoundLow"]
 
-files = [1,2,3]
-TESTOFFSETS = [0, 2.4, 1.5]
+files = [1,2,3,4]
+TESTOFFSETS = [0, 2.4, 1.5, 30]
 featuren = len(features)
 
 def getSensorDataFromFile(filen):

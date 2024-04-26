@@ -20,6 +20,7 @@ def preproc(split=0.3):
 
     datapath = 'constructedData/binPunches.csv'
     df = pd.read_csv(datapath)
+    df = df.drop(['SoundLow'], axis=1) #Sound data just kinda sucks tbh
     
     y = df['Punch']
     Xs = df.drop(['Punch'], axis=1)
