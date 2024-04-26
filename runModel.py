@@ -6,6 +6,7 @@ import pickle
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
+from joblib import load
 
 POLLSIZE = 100
 # accelerometer and magnetometer on any i2c pin
@@ -18,12 +19,9 @@ num = str(input("EnterTestNum: "))
 
 FILE = f"Data/data{num}.csv"
 
-with open('pkls/finalized_model.sav', 'rb') as md:
-    model = pickle.load(md)
-with open('pkls/pcaTransformer', 'rb') as pc:
-    pca = pickle.load(pc)
-with open('pkls/scaleTransformer'), 'rb' as sc:
-    scaler = pickle.load(sc)
+model = load('pkls/finalized_model.bin')
+pca = load('pkls/pca_tr.bin')
+scaler = load('pkls/stdscl_tr.bin')
 
 while True:        
 
