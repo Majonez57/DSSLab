@@ -18,9 +18,12 @@ num = str(input("EnterTestNum: "))
 
 FILE = f"Data/data{num}.csv"
 
-model = pickle.load('pkls/finalized_model.sav')
-pca = pickle.load('pkls/pcaTransformer')
-scaler = pickle.load('pkls/scaleTransformer')
+with open('pkls/finalized_model.sav') as md:
+    model = pickle.load(md)
+with open('pkls/pcaTransformer') as pc:
+    pca = pickle.load(pc)
+with open('pkls/scaleTransformer') as sc:
+    scaler = pickle.load(sc)
 
 while True:        
 
