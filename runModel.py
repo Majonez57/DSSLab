@@ -41,7 +41,7 @@ while True:
     s =sensors.sound.get_level()
         
     rawData = np.array([ax,ay,az,am,rx,ry,rz,rm,ax2,ay2,az2,am2,rx2,ry2,rz2,rm2,s])
-    rawData.reshape(1,-1)
+    rawData = rawData.reshape(1,-1)
 
     inData = pca.transform(scaler.transform(rawData))
 
