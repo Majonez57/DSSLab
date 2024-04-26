@@ -8,6 +8,7 @@ from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.utils.class_weight import compute_class_weight
 import matplotlib.pyplot as plt
 from imblearn.over_sampling import SMOTE
+from joblib import dump, load
 import seaborn as sns
 import pickle
 
@@ -40,8 +41,8 @@ def preproc(split=0.3):
     # PCA!
     Xs_train = pca.fit_transform(Xs_train)
 
-    pickle.dump(pca, open('pkls/pcaTransformer', 'wb'))
-    pickle.dump(scaler, open('pkls/scaleTransformer', 'wb'))
+    dump(pca, 'pkls/pca_tr.bin', compress=True)
+    dump(scaler, 'pkls/stdscl_tr.bin', compress=True)
 
     print("AFTER PCA: ", Xs_train.shape)
 
@@ -94,8 +95,9 @@ y_pred_new = best_lr_model.predict(Xs_test)
 # Print classification report
 print("\nClassification Report (Test Set):\n", classification_report(y_test.values.ravel(), y_pred_new))
 
-filename = 'pkls/finalized_model.sav'
-pickle.dump(best_lr_model, open(filename, 'wb'))
+filename = 'pkls/finalized_model.bin'
+
+dump(best_lr_model, filename, compress=True)
 
 # Plot the Confusion Matrix for the test set
 cm_new = confusion_matrix(y_test, y_pred_new)
