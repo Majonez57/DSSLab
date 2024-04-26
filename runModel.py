@@ -46,7 +46,7 @@ while True:
 
     inData = pca.transform(scaler.transform(rawData))
 
-    out = model.predict(inData)
+    out = model.predict(inData.values)
 
     print(out)
     
