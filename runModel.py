@@ -42,7 +42,7 @@ while True:
 
     s =sensors.sound.get_level()
         
-    rawData = pd.DataFrame(data=np.array([round(x,3) for x in [ax,ay,az,am,rx,ry,rz,rm,ax2,ay2,az2,am2,rx2,ry2,rz2,rm2,s]]),
+    rawData = pd.DataFrame(data=[np.array([round(x,3) for x in [ax,ay,az,am,rx,ry,rz,rm,ax2,ay2,az2,am2,rx2,ry2,rz2,rm2,s]])],
                            columns = ["AccelXLow", "AccelYLow", "AccelZLow", "AccelMLow",
                                       "GyroXLow", "GyroYLow", "GyroZLow", "GyroMLow",
                                       "AccelXTop", "AccelYTop", "AccelZTop", "AccelMTop",
