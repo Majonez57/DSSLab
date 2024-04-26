@@ -2,7 +2,7 @@ import sensors
 import csv
 import time
 from time import sleep as zzz
-import pickle
+import numpy as np
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
@@ -40,8 +40,9 @@ while True:
 
     s =sensors.sound.get_level()
         
-    rawData = [ax,ay,az,am,rx,ry,rz,rm,ax2,ay2,az2,am2,rx2,ry2,rz2,rm2,s]
-    
+    rawData = np.array([ax,ay,az,am,rx,ry,rz,rm,ax2,ay2,az2,am2,rx2,ry2,rz2,rm2,s])
+    rawData.reshape(1,-1)
+
     inData = pca.transform(scaler.transform(rawData))
 
     out = model.predict(inData)
