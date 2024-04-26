@@ -44,9 +44,9 @@ while True:
     rawData = np.array([ax,ay,az,am,rx,ry,rz,rm,ax2,ay2,az2,am2,rx2,ry2,rz2,rm2,s])
     rawData = rawData.reshape(1,-1)
 
-    inData = pca.transform(scaler.transform(rawData))
+    inData = pca.transform(scaler.transform(rawData.values))
 
-    out = model.predict(inData.values)
+    out = model.predict(inData)
 
     print(out)
     
