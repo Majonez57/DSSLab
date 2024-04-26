@@ -48,7 +48,7 @@ while True:
                                       "AccelXTop", "AccelYTop", "AccelZTop", "AccelMTop",
                                       "GyroXTop", "GyroYTop", "GyroZTop", "GyroMTop",
                                       "SoundLow"])
-    rawData = rawData.reshape(1,-1)
+    #rawData = rawData.reshape(1,-1)
 
     inData = pca.transform(scaler.transform(rawData))
 
