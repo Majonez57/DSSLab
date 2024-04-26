@@ -20,6 +20,7 @@ num = str(input("EnterTestNum: "))
 FILE = f"Data/data{num}.csv"
 
 model = load('pkls/finalized_model.bin')
+model.verbose = False
 pca = load('pkls/pca_tr.bin')
 scaler = load('pkls/stdscl_tr.bin')
 
@@ -47,7 +48,6 @@ while True:
 
     out = model.predict(inData)
 
-    if out == '1':
-        print("PUNCH")
+    print(out)
     
     zzz(0.05)
