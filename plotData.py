@@ -12,7 +12,8 @@ varnames = ["AccelXLow", "AccelYLow", "AccelZLow", "AccelMLow",
 
 varn = 17
 
-TESTNUM = 3
+TESTNUM = 1
+TESTOFFSETS = [0,-2.4,-1.5] # Reaction time offset for each hit
 
 def read_variables_from_file(filename):
     timestamps = []
@@ -21,7 +22,7 @@ def read_variables_from_file(filename):
         reader = csv.reader(file)
         init_time = float(next(reader)[0])  # Read the first line, convert to float
         for row in reader:
-            timestamps.append(init_time + float(row[0]))  # Add to initial timestamp
+            timestamps.append(init_time + float(row[0])+TESTOFFSETS[TESTNUM-1])  # Add to initial timestamp
             for i, value in enumerate(row[1:]):
                 variables[i].append(float(value))
     return timestamps, variables
