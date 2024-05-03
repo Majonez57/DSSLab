@@ -18,7 +18,7 @@ pca = PCA(n_components=0.98)
 
 def preproc(split=0.3):
 
-    datapath = 'constructedData/binPunches.csv'
+    datapath = 'constructedData/binPunches2.csv'
     df = pd.read_csv(datapath)
     df = df.drop(['SoundLow'], axis=1) #Sound data just kinda sucks tbh
     
@@ -42,8 +42,8 @@ def preproc(split=0.3):
     # PCA!
     Xs_train = pca.fit_transform(Xs_train)
 
-    dump(pca, 'pkls/pca_tr.bin', compress=True)
-    dump(scaler, 'pkls/stdscl_tr.bin', compress=True)
+    dump(pca, 'pkls/pca_tr2.bin', compress=True)
+    dump(scaler, 'pkls/stdscl_tr2.bin', compress=True)
 
     print("AFTER PCA: ", Xs_train.shape)
 
@@ -96,7 +96,7 @@ y_pred_new = best_lr_model.predict(Xs_test)
 # Print classification report
 print("\nClassification Report (Test Set):\n", classification_report(y_test.values.ravel(), y_pred_new))
 
-filename = 'pkls/finalized_model.bin'
+filename = 'pkls/finalized_model2.bin'
 
 dump(best_lr_model, filename, compress=True)
 
@@ -107,4 +107,4 @@ sns.heatmap(cm_new, annot=True, fmt='g', cmap='Blues')
 plt.title('Confusion Matrix for the Test Set')
 plt.xlabel('Predicted labels')
 plt.ylabel('True labels')
-plt.show()
+plt.show()z

@@ -28,13 +28,21 @@ def getSensorDataFromFile(filen):
 
 def getPunchDataFromFile(filen):
     filename = f'Labels/labels{filen}.txt'
-
+    def getLabel(text):
+        if 'lo' in text:
+            return 1
+        elif 'mid' in text:
+            return 2
+        elif 'hi' in text:
+            return 3
+        
     truth = []
 
     with open(filename, 'r') as label_file:
         for line in label_file:
-            label_time = float(line.split(',')[0])
-            truth.append(label_time+TESTOFFSETS[filen-1])
+            s = line.split(',')
+            label_time = float(s[0])
+            truth.append((label_time+TESTOFFSETS[filen-1], getLabel(s[1])))
     
     return truth
 
@@ -53,14 +61,12 @@ def labelData(targetfile, fileindexes, gap=0.5):
 
                 label = 0
                 for t in truth:
-                    if t-gap <= time <= t+gap: #Punch Detected
-                        label = 1
+                    if t[0]-gap <= time <= t[0]+gap: #Punch Detected
+                        label = t[1]
                         break 
                 
                 data = ','.join(map(str, row))
                 file.write(f'{label},{data}\n') #No Punch Detected
 
 
-data_time, data_values = getSensorDataFromFile(1)
-truth = getPunchDataFromFile(1)
-labelData('constructedData/binPunches.csv', files)
+labelData('constructedData/binPunches2.csv', files)
