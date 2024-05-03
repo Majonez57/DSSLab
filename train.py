@@ -29,8 +29,6 @@ def preproc(split=0.3):
 
     smote = SMOTE()
     Xs, y = smote.fit_resample(Xs, y)
-    
-    
 
     # Train Test Split
     Xs_train, Xs_test, y_train, y_test = train_test_split(Xs, y, test_size=split, random_state=RSEED)
@@ -107,4 +105,4 @@ sns.heatmap(cm_new, annot=True, fmt='g', cmap='Blues')
 plt.title('Confusion Matrix for the Test Set')
 plt.xlabel('Predicted labels')
 plt.ylabel('True labels')
-plt.show()z
+plt.show()
