@@ -57,8 +57,8 @@ while True:
 
     if len(last_5) > 80:
         last_5.pop(16)   
-        rawData = pd.DataFrame(data=last_5)
-     
+        rawData = pd.DataFrame(data=np.array(last_5))
+
         inData = pca.transform(scaler.transform(rawData))
         out = model.predict(inData)
 
