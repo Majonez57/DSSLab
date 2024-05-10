@@ -59,7 +59,7 @@ while True:
         last_5.pop(16)   
         print(last_5)
         rawData = np.array(last_5)
-        rawData = rawData.reshape(1,-1)
+        rawData = pd.DataFrame(data=[rawData])
         inData = pca.transform(scaler.transform(last_5))
         out = model.predict(inData)
 
