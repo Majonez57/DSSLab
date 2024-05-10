@@ -34,7 +34,7 @@ def combine_dataframes(last_5):
     
     combined_df_long = combined_series.reset_index(drop=True)
     
-    return combined_df_long
+    return combined_df_long.to_frame()
 
 while True:        
 
