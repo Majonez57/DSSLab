@@ -50,8 +50,6 @@ while True:
     # magnitude of magnetic field
     rm = sensors.gyro.get_magnitude()
     rm2 = sensors.gyro.get_magnitude()
-
-    s =sensors.sound.get_level()
         
     rawData = pd.DataFrame(data=[np.array([round(x,3) for x in [ax,ay,az,am,rx,ry,rz,rm,ax2,ay2,az2,am2,rx2,ry2,rz2,rm2]])],)
     #rawData = rawData.reshape(1,-1)
