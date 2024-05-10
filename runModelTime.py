@@ -20,10 +20,10 @@ num = str(input("EnterTestNum: "))
 
 FILE = f"Data/data{num}.csv"
 
-model = load('pkls/finalized_model2.bin')
+model = load('pkls/finalized_model_mlp.bin')
 model.verbose = False
-pca = load('pkls/pca_tr2.bin')
-scaler = load('pkls/stdscl_tr2.bin')
+pca = load('pkls/pca_tr_mlp.bin')
+scaler = load('pkls/stdscl_tr_mlp.bin')
 
 last_5 = []
 
