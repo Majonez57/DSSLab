@@ -60,7 +60,7 @@ while True:
         print(last_5)
         rawData = np.array(last_5)
         rawData = pd.DataFrame(data=[rawData])
-        inData = pca.transform(scaler.transform(last_5))
+        inData = pca.transform(scaler.transform(rawData))
         out = model.predict(inData)
 
 
