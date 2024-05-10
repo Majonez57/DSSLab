@@ -62,14 +62,16 @@ while True:
         out = model.predict(inData)
 
 
-    if out == 1:
-        print("LIGHT HIT")
-    elif out == 2:
-        print("MEDIUM HIT")
-    elif out == 3:
-        print("STRONG HIT")
+        if out == 1:
+            print("LIGHT HIT")
+        elif out == 2:
+            print("MEDIUM HIT")
+        elif out == 3:
+            print("STRONG HIT")
 
-    if out == 0:
-        zzz(0.05)
+        if out == 0:
+            zzz(0.05)
+        else:
+            zzz(0.3)
     else:
-        zzz(0.3)
+        zzz(0.05)
