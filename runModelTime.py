@@ -51,16 +51,15 @@ while True:
     rm = sensors.gyro.get_magnitude()
     rm2 = sensors.gyro.get_magnitude()
         
-    rawData = pd.DataFrame(data=[np.array([round(x,3) for x in [ax,ay,az,am,rx,ry,rz,rm,ax2,ay2,az2,am2,rx2,ry2,rz2,rm2]])],)
     #rawData = rawData.reshape(1,-1)
 
-    last_5.append(rawData)
+    last_5.extend([round(x,3) for x in [ax,ay,az,am,rx,ry,rz,rm,ax2,ay2,az2,am2,rx2,ry2,rz2,rm2]])
 
     if len(last_5) > 5:
-        last_5.pop(0)
-        data = combine_dataframes(last_5)
-        print(data)
-        inData = pca.transform(scaler.transform(data))
+        last_5.pop(16)   
+        rawData = pd.DataFrame(data=last_5)
+     
+        inData = pca.transform(scaler.transform(rawData))
         out = model.predict(inData)
 
 
