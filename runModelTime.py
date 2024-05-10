@@ -73,6 +73,7 @@ while True:
         if out == 0:
             zzz(0.05)
         else:
-            zzz(0.3)
+            zzz(0.5)
+            last_5 = []
     else:
         zzz(0.05)
