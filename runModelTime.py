@@ -54,12 +54,12 @@ while True:
     rawData = pd.DataFrame(data=[np.array([round(x,3) for x in [ax,ay,az,am,rx,ry,rz,rm,ax2,ay2,az2,am2,rx2,ry2,rz2,rm2]])],)
     #rawData = rawData.reshape(1,-1)
 
-    inData = pca.transform(scaler.transform(rawData))
+    last_5.append(rawData)
 
-    last_5.append(inData)
     if len(last_5) > 5:
         last_5.pop(0)
-        out = model.predict(combine_dataframes(last_5))
+        inData = pca.transform(scaler.transform(combine_dataframes(last_5)))
+        out = model.predict(inData)
 
 
     if out == 1:
