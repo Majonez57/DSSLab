@@ -58,7 +58,9 @@ while True:
 
     if len(last_5) > 5:
         last_5.pop(0)
-        inData = pca.transform(scaler.transform(combine_dataframes(last_5)))
+        data = combine_dataframes(last_5)
+        print(data)
+        inData = pca.transform(scaler.transform(data))
         out = model.predict(inData)
 
 
